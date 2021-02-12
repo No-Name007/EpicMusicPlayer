@@ -38,6 +38,38 @@ function EpicMusicPlayer:OpenSongMenu(frame, listIndex, songIndex)
 		disabled = locked,
 	}
 
+	dropdownSyncType = {}
+	dropdownSyncType[#dropdownSyncType + 1] = {
+		text = "PARTY",
+		notCheckable = true,
+		func = function()
+			EpicMusicPlayer:SyncAndPlayTo(listIndex, songIndex, "PARTY")
+			dropdown:Hide()
+		end,
+	}
+	dropdownSyncType[#dropdownSyncType + 1] = {
+		text = "GUILD",
+		notCheckable = true,
+		func = function()
+			EpicMusicPlayer:SyncAndPlayTo(listIndex, songIndex, "GUILD")
+			dropdown:Hide()
+		end,
+	}
+	dropdownSyncType[#dropdownSyncType + 1] = {
+		text = "RAID",
+		notCheckable = true,
+		func = function()
+			EpicMusicPlayer:SyncAndPlayTo(listIndex, songIndex, "RAID")
+			dropdown:Hide()
+		end,
+	}
+	dropdownmenu[#dropdownmenu + 1] = {
+		text = "Sync music to",
+		hasArrow = true,
+		notCheckable = true,
+		menuList = dropdownSyncType,
+	}
+
 	for i, dstList in ipairs(EpicMusicPlayer.playlists) do
 		if not EpicMusicPlayer:IsListLocked(i) and i ~=listIndex then
 			dropdowncopy[#dropdowncopy + 1] = {

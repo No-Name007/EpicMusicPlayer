@@ -673,6 +673,18 @@ local function findSongByName(name)
 	end
 end
 
+function EpicMusicPlayer:FindSongByName(name)
+	if playlists then
+		for i, list in ipairs(playlists) do
+			for i, song in ipairs(list) do
+				if song.Name == name then
+					return song
+				end
+			end
+		end
+	end
+end
+
 function EpicMusicPlayer:AddSogIdToOldSavedSongs()
 	if _G.EpicMusicPlayer_PlayList then
 		for i, list in ipairs(_G.EpicMusicPlayer_PlayList) do

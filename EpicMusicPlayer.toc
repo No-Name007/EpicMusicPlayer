@@ -35,6 +35,8 @@ core\osd.lua
 core\chat.lua
 core\bindings.lua
 
+sync/sync.lua
+
 gui\gui.lua
 gui\skins.lua
 

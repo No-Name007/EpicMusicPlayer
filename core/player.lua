@@ -29,6 +29,8 @@ function EpicMusicPlayer:Play(song, stillPlaying)
 		end
 	end
 
+	self.db.songsynced = false
+
 	self:CancelTimer(timer,true)
 
 	if not stillPlaying then
@@ -65,11 +67,13 @@ function EpicMusicPlayer:Play(song, stillPlaying)
 		self.db.playedSeconds = self.db.playedSeconds + 1
 		if(self.db.playedSeconds >= songlength)then
 			if self.scheduledStop then
-					self:ScheduledStop()
-					return
+				self:ScheduledStop()
+				return
 			end
 			if self.db.loopsong then
 				self:Play()
+			elseif self.db.songsynced == true then
+				self:Stop()
 			else
 				self:PlayNext()
 			end
@@ -148,4 +152,9 @@ function EpicMusicPlayer:PlaySong(list, song)
     EpicMusicPlayer:AddSongToHistory(EpicMusicPlayer:GetSong(list, song),list, song)
 		self:Play()
 	--end
+end
+
+function EpicMusicPlayer:PlaySongSynced(song)
+	historyInUse = false
+	self:Play(song)
 end
